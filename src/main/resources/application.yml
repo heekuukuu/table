@@ -8,8 +8,12 @@ spring:
     url: jdbc:mysql://localhost:3306/heekuutable?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: heekuu03
-  thymeleaf:
-    cache: false
+
+  mustache:
+    prefix: classpath:/templates/
+    suffix: .mustache
+    enabled: true
+    expose-request-attributes: true
 
   # spring data jpa 설정
   jpa:

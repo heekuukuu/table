@@ -1,0 +1,22 @@
+
+<html>
+<head>
+<body>
+<h1>join page</h1>
+<hr>
+
+</head>
+<form action="/joinProc" method="post" name="joinForm">
+    <input type="text" name="username" placeholder="Username"/>
+    <input type="password" name="password" placeholder="Password"/>
+		<input type="submit" value="Join"/>
+
+        <a href="/">Home</a>
+</form>
+{{#errorMessage}}
+    <div class="error-message">
+        {{errorMessage}}
+    </div>
+{{/errorMessage}}
+</body>
+</html>
