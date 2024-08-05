@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>예약하기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>예약하기</h1>
+    <form th:action="@{/reservation/save}" method="post">
+        <!-- 매장 ID를 숨겨진 필드로 포함 -->
+        <input type="hidden" name="storeId" th:value="${store.id}">
+
+        <!-- 예약 날짜 입력 -->
+        <div class="form-group">
+            <label for="date">날짜</label>
+            <input type="date" id="date" name="date"
+                   th:min="${minDate}"
+                   th:max="${maxDate}"
+                   required>
+        </div>
+
+        <!-- 예약 시간 선택 -->
+        <div class="form-group">
+            <label for="time">시간</label>
+            <select id="time" name="time" required>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+            </select>
+        </div>
+
+        <!-- 핸드폰 번호 입력 -->
+        <div class="form-group">
+            <label for="phone">핸드폰 번호</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <!-- 예약하기 버튼 -->
+        <div class="form-group">
+            <button type="submit">예약하기</button>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

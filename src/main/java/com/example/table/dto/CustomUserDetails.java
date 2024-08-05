@@ -1,8 +1,9 @@
 package com.example.table.dto;
 
 
-import com.example.table.entitiy.UserEntity;
+import com.example.table.entity.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private UserEntity userEntity;
+    private User user;
 
-    public CustomUserDetails(UserEntity userEntity) {
+    public CustomUserDetails(User user) {
 
-        this.userEntity = userEntity;
+        this.user = user;
     }
 
 
@@ -23,26 +24,21 @@ public class CustomUserDetails implements UserDetails {
 
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
-        collection.add(new GrantedAuthority() {
+        collection.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        return collection;}
 
-            @Override
-            public String getAuthority() {
 
-                return userEntity.getRole();
-            }
-        });
 
-        return collection;
-    }
+
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUsername();
+        return user.getUsername();
     }
 
 

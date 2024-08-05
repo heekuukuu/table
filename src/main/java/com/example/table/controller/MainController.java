@@ -1,42 +1,34 @@
 package com.example.table.controller;
 
-
-import org.springframework.boot.Banner;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 @Controller
 public class MainController {
 
     @GetMapping("/")
     public String mainP(Model model) {
-
-        String id = SecurityContextHolder.getContext().getAuthentication().getName();
-
+        // 현재 인증된 사용자의 정보를 가져옴
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iter = authorities.iterator();
-        GrantedAuthority auth = iter.next();
-        String role = auth.getAuthority();
+        // 인증된 사용자일 경우
+        if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName())) {
+            String username = authentication.getName();
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            // 사용자는 한 가지 역할만 가질 수 있음
+            String role = authorities.iterator().next().getAuthority();
 
-        model.addAttribute("id", id);
-        model.addAttribute("role",role );
-
-        return "main";
+            // Model에 username과 role 추가
+            model.addAttribute("username", username);
+            model.addAttribute("role", role);
+        }
+        return "main"; // main.html로 이동
     }
+
 }

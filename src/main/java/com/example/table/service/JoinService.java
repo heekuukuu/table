@@ -1,7 +1,7 @@
 package com.example.table.service;
 
 import com.example.table.dto.JoinDTO;
-import com.example.table.entitiy.UserEntity;
+import com.example.table.entity.User;
 import com.example.table.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,16 +22,16 @@ public class JoinService {
         //db에 이미 동일한 username을 가진 회원이 존재하는지?
         boolean isUser = userRepository.existsByUsername(joinDTO.getUsername());
         if (isUser) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
         }
 
-        UserEntity data = new UserEntity();
-
-        data.setUsername(joinDTO.getUsername());
-        data.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
-        data.setRole("ROLE_USER");
 
 
-        userRepository.save(data);
+        User user = new User();
+        user.setUsername(joinDTO.getUsername());
+        user.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
+        user.setRole(joinDTO.getRole());
+
+        userRepository.save(user);
     }
 }

@@ -1,9 +1,9 @@
 package com.example.table.repository;
-import com.example.table.entitiy.UserEntity;
+import com.example.table.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsByUsername(String username);
-    UserEntity findByUsername(String username);
+    User findByUsername(String username);
 
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>매장 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+        .actions {
+            text-align: center;
+        }
+        .button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .reserve {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>매장 목록</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>가게 이름</th>
+            <th>주소</th>
+            <th>상세 설명</th>
+            <th>예약</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Thymeleaf를 사용하여 stores 리스트를 반복하여 표시합니다. -->
+
+         <!-- th:each는 stores 리스트의 각 항목을 반복합니다. -->
+        <tr th:each="store : ${stores}">
+            <!-- store 객체의 name 속성 값을 셀에 표시합니다. -->
+            <td th:text="${store.name}"></td>
+            <!-- store 객체의 address 속성 값을 셀에 표시합니다. -->
+            <td th:text="${store.address}"></td>
+            <!-- store 객체의 description 속성 값을 셀에 표시합니다. -->
+            <td th:text="${store.description}"></td>
+            <!-- 예약하기 버튼을 표시합니다. -->
+            <td class="actions">
+                <a class="button reserve" th:href="@{/reservation/new/{id}(id=${store.id})}">예약하기</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

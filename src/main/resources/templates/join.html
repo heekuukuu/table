@@ -9,14 +9,20 @@
 <form action="/joinProc" method="post" name="joinForm">
     <input type="text" name="username" placeholder="Username"/>
     <input type="password" name="password" placeholder="Password"/>
+    <label for="role">권한 선택:</label>
+    <select id="role" name="role" required>
+        <option value="CUSTOMER">고객</option>
+        <option value="MANAGER">매니저</option>
+    </select><br>
+
 		<input type="submit" value="Join"/>
 
         <a href="/">Home</a>
 </form>
-{{#errorMessage}}
+
     <div class="error-message">
-        {{errorMessage}}
+
     </div>
-{{/errorMessage}}
+
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>매장 수정</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h1>매장 수정</h1>
+<!-- 매장 정보를 수정하는 폼 -->
+<form th:action="@{/manager/update-store/{id}(id=${store.id})}" th:object="${store}" method="post">
+    <div>
+        <label for="name">매장 이름</label>
+
+        <!-- 매장 이름을 입력받는 필드 -->
+        <input type="text" id="name" th:field="*{name}" placeholder="매장 이름을 입력하세요" />
+    </div>
+    <div>
+        <label for="address">주소</label>
+        <!-- 매장 주소를 입력받는 필드 -->
+        <input type="text" id="address" th:field="*{address}" placeholder="주소를 입력하세요" />
+    </div>
+    <label for="description">설명</label>
+    <!-- 매장 설명을 입력받는 필드 -->
+    <textarea id="description" th:field="*{description}" th:text="*{description}" placeholder="설명을 입력하세요" rows="5"></textarea>
+
+    <div>
+        <button type="submit">매장 수정</button>
+    </div>
+</form>
+</body>
+</html>

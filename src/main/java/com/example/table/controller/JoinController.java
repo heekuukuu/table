@@ -14,6 +14,7 @@ public class JoinController {
     @Autowired
     private JoinService joinService;
 
+
     @GetMapping("/join")
     public String joinForm(Model model) {
         model.addAttribute("errorMessage", "");

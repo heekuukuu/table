@@ -1,24 +1,35 @@
 server:
   port: 8081
 
-# database 연동 설정
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/heekuutable?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/heekuutable?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useUnicode=true
     username: root
     password: heekuu03
 
-  mustache:
+  thymeleaf:
     prefix: classpath:/templates/
-    suffix: .mustache
     enabled: true
     expose-request-attributes: true
+    servlet:
+      content-type: text/html
+    encoding: UTF-8
 
-  # spring data jpa 설정
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect # or MySQL8Dialect
-    open-in-view: false
-    show-sql: true
     hibernate:
       ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  messages:
+    encoding: UTF-8
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+      force-response: true
+      enabled: true
